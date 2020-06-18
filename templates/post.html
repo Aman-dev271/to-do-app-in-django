@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="/index/" method="POST" style="margin-left: 25%;">
+    {% csrf_token %}
+    <div class="form-group col-md-6">
+      {% if form.email.errors %}
+      {% for err_email in form.email.errors %}
+      <!-- to show website in this type this called fields Error -->
+     <p class='text-danger'><b>Email</b> {{ err_email | escape }}</p>
+
+      {% endfor %}
+
+      {% endif %}
+        {% if form.title.errors %}
+        {% for err_title in form.title.errors %}
+       <p class='text-danger'><b>Title</b> {{ err_title | escape }}</p>
+
+        {% endfor %}
+
+        {% endif %}
+        {%if form.errors %}
+        {% for errors in form.non_field_error %}
+        <p class='text-danger'>{{errors}}</p>
+        {% endfor %}
+        {% endif %}
+        {% if form.content.errors %}
+        {% for err_content in form.content.errors %}
+       <p class='text-danger'><b>Content</b> {{ err_content | escape }}</p>
+
+        {% endfor %}
+
+        {% endif %}
+        {% for f in form %}
+       <p>{{f.label_tag}}</p>
+{{f}}
+{% endfor %}
+<button type= "submit" class="btn btn-primary">ClickTO Submit</button>
+</div>
+</form>
+
+
+
+<table class='form-group table col-md-12' >
+    <tr>
+        <th>Email</th>
+      <th>
+         Title
+      </th>
+      <th>
+        content
+    </th>
+    <th>
+        Time of creation
+    </th>
+    <th>Username</th>
+    <th>Catagory</th>
+    <th>Catagories that use already</th>
+    <th colspan="2">Actions</th>
+
+    </tr>
+    {% for table in rows %}
+    <tr>
+      <!-- <td><img src="{%static '/images/" alt="">{{table.image_of_person}}</td> -->
+      <td>{{table.email}}</td>
+      <td>{{table.title}}</td>
+      <td>{{table.content}}</td>
+      <td>{{table.created_at}}</td>
+      <td>{{table.user.username}}</td>
+      <td>
+     <ul>{% for cat in table.catagory.all%}
+
+<li>{{ cat }}</li>
+      {% endfor %}
+     </ul></td>
+     
+     <td>
+       {% for cats in catagories %}
+       <h3>{{ cats.title }}</h3>
+       {% for cat in cats.posts_set.all %}
+       {{cat}}
+
+       {% endfor %}
+
+      {% endfor %}
+     </td>
+      
+      
+      <!-- <td><button class= 'btn btn-primary'><a class='text-light' style= "text-decoration: none;" href="/index/?id={{table.id}}&method=delete" >Edit</a></button>
+      </td> -->
+      <td><button class= 'btn btn-danger'><a class='text-light' style= "text-decoration: none;" href="/index/?id={{table.id}}&method=delete">Delete</a>
+      </button></td>
+    </tr>
+
+    {% endfor %}
+
+  </table>
+{% endblock %}

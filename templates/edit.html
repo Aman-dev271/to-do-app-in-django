@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method= 'POST', action= '/contact/?method = edit&id={{row.id}}'>
+    <div class="row">
+        <div class="form-group">
+            {% csrf_token %}
+        </div>
+        <div class="row">
+          <div class="form-group">
+              {% csrf_token %}
+          </div>
+        </div>
+    
+    <div class="form-group col-md-6">
+      <label for="inputName">Name</label>
+      <input name='name' type="text" class="form-control" id="inputName"value = '{{row.name}}'>
+    </div>
+    
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input name='email' type="email" class="form-control" id="inputEmail4" value = '{{row.email}}'>
+      </div>
+      <!-- <div class="form-group col-md-12">
+        <label for="inputImage">Upload image</label>
+        <input name='name' type="file" class="form-control" id="inputImage" placeholder="Image">
+      </div> -->
+    
+    
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <label for="inputCity">City</label>
+        <input name = 'city' type="text" class="form-control" value = '{{row.city}}'id="inputCity">
+      </div>
+      <div class="form-group col-md-5">
+        <label for="inputState">State</label>
+        <select name="state" id="inputState" class="form-control" value = '{{row.state}}'>
+          <option selected>Himachal</option>
+          <option selected>Punjab</option>
+          <option selected>Mharastra</option>
+          <option selected>Tilangana</option>
+          <option selected>Bihar</option>
+          <option selected>Asaam</option>
+          
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input name="zip" type="text" class="form-control" id="inputZip"value = '{{row.zipcode}}'>
+      </div>
+   
+  <div class='form-group'>
+    <button name="btn" type="submit" class="btn btn-primary">Submit</button>
+</div>
+  </form>
+ 
+ 
+{% endblock %}

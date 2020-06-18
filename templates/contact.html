@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method= 'POST', action= '/contact/' style="margin-left: 10%;">
+    <div class='rows'>
+        <div class="form-group">
+            {% csrf_token %}
+        </div>
+       
+        <div class="form-row">
+    <div class="form-group col-md-4" >
+      <label for="inputName">Name</label>
+      <input name='name' type="text" class="form-control" id="inputName" placeholder="Nmae">
+    </div>
+    
+      <div class="form-group col-md-4" >
+        <label for="inputEmail4">Email</label>
+        <input name='email' type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      </div>
+      <!-- <div class="form-group col-md-12">
+        <label for="inputImage">Upload image</label>
+        <input name='name' type="file" class="form-control" id="inputImage" placeholder="Image">
+      </div> -->
+    </div>
+  
+</div>
+    
+    
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputCity">City</label>
+        <input name = 'city' type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="inputState">State</label>
+        <select name="state" id="inputState" class="form-control">
+          <option selected>Himachal</option>
+          <option selected>Punjab</option>
+          <option selected>Mharastra</option>
+          <option selected>Tilangana</option>
+          <option selected>Bihar</option>
+          <option selected>Asaam</option>
+          
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input name="zip" type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+   
+  <div class='form-group'>
+    <button name="btn" type="submit" class="btn btn-primary">Submit</button>
+</div>
+  </form>
+
+
+  <table class='form-group table col-md-12' >
+    <tr>
+      <th>
+         Name
+      </th>
+      <th>
+        Email
+    </th>
+    
+  <th>
+    city
+</th>
+<th>
+  State
+</th>
+<th>
+  Zipcode
+</th>
+<th colspan=2> Actions</th>
+    </tr>
+    {% for table in rows %}
+    <tr>
+      <!-- <td><img src="{%static '/images/" alt="">{{table.image_of_person}}</td> -->
+      <td>{{table.name}}</td>
+      <td>{{table.email}}</td>
+      
+      <td>{{table.city}}</td>
+      <td>{{table.state}}</td>
+      <td>{{table.zipcode}}</td>
+      <td><button class= 'btn btn-primary'><a class='text-light' style= "text-decoration: none;" href="/contact/?id={{table.id}}&method=edit" >Edit</a></button>
+      </td>
+      <td><button class= 'btn btn-danger'><a class='text-light' style= "text-decoration: none;" href="/contact/?id={{table.id}}&method=delete">Delete</a>
+      </button></td>
+    </tr>
+
+    {% endfor %}
+
+  </table>
+ 
+{% endblock %}

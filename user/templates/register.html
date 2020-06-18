@@ -1,0 +1,120 @@
+{% extends 'user/base.html'%}
+{% block content %}
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name">Registration</h1>
+
+        </div>
+        
+        
+    </div>
+    <!-- END Header -->
+    
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        
+        
+
+
+
+
+<div id="content-main">
+ 
+  
+
+
+
+<form action="/user/register/" method="post" id="login-form" class='register'>
+ 
+  {% csrf_token %}
+
+  <div class='form-row'>
+    <p> {% if form.email.errors %}
+     <!-- this is for to giving mannual errors  -->
+     <!-- {% for errors in form.username.errors%}
+     <i class="alert alert-danger">{{ errors | escape }}</i>
+      {{ errors }} 
+     {% endfor %} -->
+     <!-- for using admin errors  -->
+     <p>{{form.email.errors}}</p>
+     {% endif %}
+   </p>
+     {{form.email.label_tag}}
+     {{form.email}}
+ 
+   </div>
+
+  <div class='form-row'>
+   <p> {% if form.username.errors %}
+    <!-- this is for to giving mannual errors  -->
+    <!-- {% for errors in form.username.errors%}
+    <i class="alert alert-danger">{{ errors | escape }}</i>
+     {{ errors }} 
+    {% endfor %} -->
+    <!-- for using admin errors  -->
+    <p>{{form.username.errors}}</p>
+    {% endif %}
+  </p>
+    {{form.username.label_tag}}
+    {{form.username}}
+
+  </div>
+  <div class='form-row'>
+    <p>{% if form.password1.errors %}
+    <!-- this is for to giving mannual errors  -->
+    <!-- {% for errors in form.password1.errors%}
+    <i class="alert alert-danger">{{ errors | escape }}</i>
+     {{ errors }}
+    {% endfor %} -->
+    <!-- for using admin errors styiling -->
+   <p>{{form.password1.errors}}</p>
+    {% endif %}
+  </p>
+    {{form.password1.label_tag}}
+    {{form.password1}}
+
+  </div>
+  <div class='form-row'>
+   <p>{% if form.password2.errors %}
+    <!-- {% for errors in form.password2.errors%}
+    <i class="alert alert-danger">{{ errors | escape }}</i>
+
+    {% endfor %} -->
+    <p> {{form.password2.errors}}</p>
+    {% endif %}
+  </p>
+  
+    {{form.password2.label_tag}}
+    {{form.password2}}
+
+  </div>
+
+<div class="submit-row">
+  <label>&nbsp;</label><input type="submit" value="Register">
+</div>
+</form>
+    <!-- END Content -->
+
+    <div id="footer">
+      <p>If you already have account</p>
+
+      <button class='btn btn-primary'><a style="text-decoration: none" href="/user/login/"   class="text-white">For Login</a>
+      </button>
+
+     
+    </div>
+</div>
+{% endblock %}
